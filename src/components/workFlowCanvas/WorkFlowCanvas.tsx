@@ -44,14 +44,7 @@ const WorkflowCanvas: React.FC<{
     (connection: Connection) => {
       const { source, target } = connection;
   
-      const sourceNode = workflowData.nodes.find((node) => node.id === source);
-      const targetNode = workflowData.nodes.find((node) => node.id === target);
-  
-      if (sourceNode?.data.label === targetNode?.data.label) {
-        messageApi.warning("Cannot connect nodes with the same label!");
-        return false;
-      }
-  
+      // Prevent duplicate connections
       const isDuplicate = workflowData.edges.some(
         (edge) => edge.source === source && edge.target === target
       );
@@ -60,6 +53,7 @@ const WorkflowCanvas: React.FC<{
         return false;
       }
   
+      // Prevent circular dependencies
       const isCircular = (source: string, target: string): boolean => {
         const visited = new Set<string>();
         const stack = [target];
@@ -125,7 +119,7 @@ const WorkflowCanvas: React.FC<{
     []
   );
 
-  //Delete 
+  // Delete selected node or edge
   const handleDelete = useCallback(() => {
     if (selectedNode) {
       setWorkflowData((prev:any) => ({

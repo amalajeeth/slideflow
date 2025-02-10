@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Layout, Drawer, Button, Grid, Row, Col, Input, message } from "antd";
 import {
   DownloadOutlined,
+  ExportOutlined,
+  ImportOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  PlusOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
 import { DndProvider } from "react-dnd";
@@ -144,7 +147,10 @@ const App: React.FC = () => {
             theme="light"
             style={{ borderRight: "1px solid #f0f0f0", padding: "16px" }}
           >
-            <h3>Workflow Tools</h3>
+            <Row justify={'center'} gutter={[16,16]} style={{paddingBottom:10}}>
+              <Col><h3>Workflow Tools</h3></Col>
+            </Row>
+            
             <Input
               placeholder="Enter node label"
               value={nodeLabel}
@@ -152,12 +158,12 @@ const App: React.FC = () => {
               style={{ marginBottom: "8px" }}
             />
             <Button
-              type="primary"
+              type="default"
               block
               onClick={handleAddNode}
               style={{ marginBottom: "16px" }}
+              icon={<PlusOutlined style={{padding:10}}></PlusOutlined>}
             >
-              Add Node
             </Button>
             <Row gutter={[8, 8]}>
               {draggableNodes.map((node) => (
@@ -173,7 +179,7 @@ const App: React.FC = () => {
             <Button
               type="primary"
               block
-              icon={<DownloadOutlined />}
+              icon={<ExportOutlined /> }
               onClick={handleExport}
               style={{ marginBottom: "8px" }}
             >
@@ -182,7 +188,7 @@ const App: React.FC = () => {
             <Button
               type="primary"
               block
-              icon={<UploadOutlined />}
+              icon={<ImportOutlined />}
               style={{ marginBottom: "16px" }}
             >
               <label htmlFor="import-workflow" style={{ cursor: "pointer" }}>
@@ -201,6 +207,7 @@ const App: React.FC = () => {
               block
               style={{ marginTop: "16px" }}
               onClick={handleReset}
+              danger
             >
               Reset Workflow
             </Button>
@@ -221,12 +228,12 @@ const App: React.FC = () => {
               style={{ marginBottom: "8px" }}
             />
             <Button
-              type="primary"
+              type="default"
               block
               onClick={handleAddNode}
               style={{ marginBottom: "16px" }}
+              icon={<PlusOutlined style={{padding:10}}></PlusOutlined>}
             >
-              Add Node
             </Button>
             <Row gutter={[8, 8]}>
               {draggableNodes.map((node) => (
@@ -270,6 +277,7 @@ const App: React.FC = () => {
               block
               style={{ marginTop: "16px" }}
               onClick={handleReset}
+              danger
             >
               Reset Workflow
             </Button>
